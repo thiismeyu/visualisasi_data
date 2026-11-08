@@ -122,6 +122,13 @@ div[data-baseweb="menu"] li:hover, div[data-baseweb="menu"] li[aria-selected="tr
 .stApp [data-testid="stRadio"] [role="radio"][aria-checked="false"] > div:first-child {background:#fff !important; border:2px solid #94A3B8 !important;}
 .stApp [data-testid="stSlider"] [data-baseweb="slider"] > div > div {background:linear-gradient(to right,#1D4ED8,#1D4ED8) !important;}
 
+/* Select: paksa semua level terang */
+.stApp [data-testid="stSelectbox"] [data-baseweb="select"] div,
+.stApp [data-testid="stMultiSelect"] [data-baseweb="select"] div {background-color:#fff !important; background-image:none !important; color:#0B2545 !important;}
+.stApp [data-testid="stMultiSelect"] span[data-baseweb="tag"] {background-color:#1D4ED8 !important;}
+.stApp [data-testid="stMultiSelect"] span[data-baseweb="tag"] * {background-color:transparent !important; color:#fff !important;}
+.stApp [data-testid="stSelectbox"] [data-baseweb="select"] > div {border:1px solid #CBD5E1 !important; border-radius:10px !important; min-height:42px;}
+
 /* Tabs & widgets */
 button[data-baseweb="tab"] {font-weight:600;}
 .foot {text-align:center; color:#94A3B8; font-size:.78rem; margin-top:24px;}
@@ -140,15 +147,20 @@ def section(num, title, sub=""):
 
 
 def style(fig, h=360, legend=True):
+    has_title = bool(fig.layout.title.text)
+    top = 56 if (legend or has_title) else 24
     fig.update_layout(
-        height=h, margin=dict(t=30, b=10, l=10, r=10),
+        height=h, margin=dict(t=top, b=48, l=64, r=24),
         font=dict(family="Inter, sans-serif", size=12, color=NAVY),
         paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
         hoverlabel=dict(bgcolor="white", font_size=12, bordercolor=GRID),
-        showlegend=legend, legend=dict(orientation="h", y=1.12, x=0, title_text=""),
-        title_font=dict(size=14, color=NAVY))
-    fig.update_xaxes(showgrid=False, linecolor=GRID, zeroline=False)
-    fig.update_yaxes(gridcolor=GRID, zeroline=False)
+        showlegend=legend,
+        legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="left", x=0, title_text=""),
+        title=dict(x=0, xanchor="left", y=0.97, font=dict(size=14, color=NAVY)))
+    fig.update_xaxes(showgrid=False, linecolor=GRID, zeroline=False, automargin=True,
+                     title_standoff=14, tickfont=dict(color=SLATE), title_font=dict(size=12, color=NAVY))
+    fig.update_yaxes(gridcolor=GRID, zeroline=False, automargin=True,
+                     title_standoff=14, tickfont=dict(color=SLATE), title_font=dict(size=12, color=NAVY))
     return fig
 
 
@@ -254,7 +266,7 @@ with g1:
                          hover_data=["sex", "region", "children"], color_discrete_map=SMOKER_COLOR,
                          labels={x_var: LABEL[x_var], "charges": "Biaya (USD)", "smoker": "Perokok"})
         fig.update_traces(marker=dict(size=7, line=dict(width=0.5, color="white")))
-        st.plotly_chart(style(fig, 380), width="stretch", theme=None)
+        st.plotly_chart(style(fig, 400), width="stretch", theme=None)
 with g2:
     with st.container(border=True, key="card_g2"):
         t1, t2 = st.tabs(["Rata-rata per kelompok", "Heatmap usia × BMI"])
@@ -264,14 +276,14 @@ with g2:
             a = d.groupby(grp, observed=True)["charges"].mean().reset_index()
             fig2 = px.bar(a, x=grp, y="charges", text_auto=".2s", labels={grp: LABEL[grp], "charges": "Rata-rata biaya (USD)"})
             fig2.update_traces(marker_color=TEAL, marker_line_width=0, textposition="outside", cliponaxis=False)
-            st.plotly_chart(style(fig2, 320, legend=False), width="stretch", theme=None)
+            st.plotly_chart(style(fig2, 340, legend=False), width="stretch", theme=None)
         with t2:
             hm = d.pivot_table(index="kelompok_usia", columns="kelompok_bmi", values="charges",
                                aggfunc="mean", observed=False)
             fig4 = px.imshow(hm, text_auto=".0f", aspect="auto", color_continuous_scale=["#E6F7F9", TEAL, NAVY],
                              labels=dict(x="Kategori BMI", y="Kelompok usia", color="USD"))
             fig4.update_layout(coloraxis_showscale=False)
-            st.plotly_chart(style(fig4, 365, legend=False), width="stretch", theme=None)
+            st.plotly_chart(style(fig4, 400, legend=False), width="stretch", theme=None)
 
 # ---------- BARIS 3 : MODEL (kiri) ──► PREDIKSI (kanan) ----------
 section(3, "Model & Prediksi", "atur parameter lalu lihat hasilnya langsung berubah")
@@ -288,11 +300,17 @@ with left:
         m1, m2 = st.columns(2)
         m1.markdown(kpi("Akurasi R²", f"{r2:.2f}", "makin dekat 1 makin baik", TEAL), unsafe_allow_html=True)
         m2.markdown(kpi("Rata-rata galat", f"${mae:,.0f}", "selisih rata-rata (MAE)", ORANGE), unsafe_allow_html=True)
-        fi = px.bar(imp_df, x="Pengaruh", y="Fitur", orientation="h", title="Faktor paling berpengaruh")
+        fi = px.bar(imp_df, x="Pengaruh", y="Fitur", orientation="h", title="Faktor paling berpengaruh pada biaya")
         fi.update_traces(marker_color=[TEAL] * (len(imp_df) - 1) + [ORANGE], marker_line_width=0)
         fi.update_yaxes(showgrid=False)
         fi.update_xaxes(showgrid=True, gridcolor=GRID)
-        st.plotly_chart(style(fi, 300, legend=False), width="stretch", theme=None)
+        fi.update_xaxes(tickformat=".0%")
+        st.plotly_chart(style(fi, 330, legend=False), width="stretch", theme=None)
+        top_f = imp_df.iloc[-1]
+        st.markdown(f'<div class="insight">💡 <b>{top_f["Fitur"]}</b> menjelaskan sekitar '
+                    f'<b>{top_f["Pengaruh"]*100:.0f}%</b> perbedaan biaya antar peserta menurut model.</div>',
+                    unsafe_allow_html=True)
+        st.caption(f"Parameter aktif: n_estimators={n_est} · max_depth={depth} · learning_rate={lr}")
 
 with right:
     with st.container(border=True, key="card_pred"):
