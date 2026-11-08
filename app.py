@@ -72,6 +72,36 @@ div[class*="st-key-card"] {background:#fff; border:1px solid #E5EAF2 !important;
 .r-badge {display:inline-block; background:rgba(255,255,255,.18); padding:5px 12px;
   border-radius:999px; font-size:.8rem; font-weight:600;}
 
+/* ===== Perbaikan keterbacaan (aman untuk mode gelap & terang) ===== */
+.stApp [data-testid="stMarkdownContainer"] p,
+.stApp [data-testid="stMarkdownContainer"] li,
+.stApp [data-testid="stMarkdownContainer"] strong,
+.stApp [data-testid="stMarkdownContainer"] em {color:#1E3A8A;}
+.stApp .hero p {color:#CFE3F1 !important;}
+.stApp .hero h1 {color:#fff !important;}
+.stApp [data-testid="stWidgetLabel"], .stApp [data-testid="stWidgetLabel"] * {color:#1E3A8A !important; font-weight:600;}
+.stApp [data-testid="stCaptionContainer"], .stApp [data-testid="stCaptionContainer"] * {color:#475569 !important;}
+.stApp [data-testid="stRadio"] label, .stApp [data-testid="stRadio"] label * {color:#1E3A8A !important;}
+.stApp [data-testid="stExpander"] summary, .stApp [data-testid="stExpander"] summary * {color:#1E3A8A !important; font-weight:600;}
+.stApp [data-testid="stExpander"] details {background:#fff; border:1px solid #E5EAF2; border-radius:12px;}
+/* Tab */
+.stApp [data-baseweb="tab-list"] button p {color:#475569 !important; font-weight:600;}
+.stApp [data-baseweb="tab-list"] button[aria-selected="true"] p {color:#1D4ED8 !important;}
+.stApp [data-baseweb="tab-highlight"] {background:#1D4ED8 !important;}
+/* Dropdown / multiselect / input jadi terang */
+.stApp div[data-baseweb="select"] > div, .stApp div[data-baseweb="input"] > div, .stApp div[data-baseweb="base-input"] {
+  background:#fff !important; border:1px solid #CBD5E1 !important; border-radius:10px !important;}
+.stApp div[data-baseweb="select"] *, .stApp input {color:#0B2545 !important;}
+.stApp div[data-baseweb="select"] svg {fill:#1E3A8A !important;}
+.stApp span[data-baseweb="tag"] {background:#1D4ED8 !important;}
+.stApp span[data-baseweb="tag"] * {color:#fff !important;}
+div[data-baseweb="popover"] ul, div[data-baseweb="popover"] li {background:#fff !important; color:#0B2545 !important;}
+div[data-baseweb="popover"] li:hover {background:#E6F0FF !important;}
+/* Slider */
+.stApp [data-testid="stSlider"] [data-testid="stThumbValue"], .stApp [data-testid="stSlider"] [data-testid="stTickBarMin"],
+.stApp [data-testid="stSlider"] [data-testid="stTickBarMax"] {color:#1D4ED8 !important; font-weight:700;}
+.stApp [data-testid="stSlider"] div[role="slider"] {background:#1D4ED8 !important; border-color:#1D4ED8 !important;}
+
 /* Tabs & widgets */
 button[data-baseweb="tab"] {font-weight:600;}
 .foot {text-align:center; color:#94A3B8; font-size:.78rem; margin-top:24px;}
