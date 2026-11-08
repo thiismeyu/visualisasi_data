@@ -92,42 +92,31 @@ div[class*="st-key-card"] {background:#fff; border:1px solid #E5EAF2 !important;
 .stApp [data-baseweb="tab-list"] button p {color:#475569 !important; font-weight:600;}
 .stApp [data-baseweb="tab-list"] button[aria-selected="true"] p {color:#1D4ED8 !important;}
 .stApp [data-baseweb="tab-highlight"] {background:#1D4ED8 !important;}
-/* Dropdown / multiselect / input jadi terang */
-.stApp div[data-baseweb="select"] > div, .stApp div[data-baseweb="input"] > div, .stApp div[data-baseweb="base-input"] {
-  background:#fff !important; border:1px solid #CBD5E1 !important; border-radius:10px !important;}
-.stApp div[data-baseweb="select"] *, .stApp input {color:#0B2545 !important;}
-.stApp div[data-baseweb="select"] svg {fill:#1E3A8A !important;}
-.stApp span[data-baseweb="tag"] {background:#1D4ED8 !important;}
-.stApp span[data-baseweb="tag"] * {color:#fff !important;}
-div[data-baseweb="popover"] ul, div[data-baseweb="popover"] li {background:#fff !important; color:#0B2545 !important;}
-div[data-baseweb="popover"] li:hover {background:#E6F0FF !important;}
 /* Slider */
 .stApp [data-testid="stSlider"] [data-testid="stThumbValue"], .stApp [data-testid="stSlider"] [data-testid="stTickBarMin"],
 .stApp [data-testid="stSlider"] [data-testid="stTickBarMax"] {color:#1D4ED8 !important; font-weight:700;}
 .stApp [data-testid="stSlider"] div[role="slider"] {background:#1D4ED8 !important; border-color:#1D4ED8 !important;}
 
-/* Brute-force: semua kotak input terang */
-.stApp [data-baseweb="select"], .stApp [data-baseweb="select"] > div, .stApp [data-baseweb="select"] > div > div,
-.stApp [data-baseweb="input"], .stApp [data-baseweb="input"] > div, .stApp [data-baseweb="base-input"],
-.stApp [data-testid="stNumberInput"] input {background:#fff !important; color:#0B2545 !important; -webkit-text-fill-color:#0B2545 !important;}
-.stApp [data-baseweb="select"] > div {border:1px solid #CBD5E1 !important; border-radius:10px !important;}
-.stApp [data-baseweb="select"] span, .stApp [data-baseweb="select"] div[value] {color:#0B2545 !important;}
-.stApp [data-baseweb="select"] span[data-baseweb="tag"], .stApp [data-baseweb="select"] span[data-baseweb="tag"] > span {background:#1D4ED8 !important; color:#fff !important;}
 .stApp [data-testid="stNumberInputStepDown"], .stApp [data-testid="stNumberInputStepUp"] {background:#EEF2FF !important; color:#1E3A8A !important;}
 .stApp [data-testid="stNumberInputStepDown"] *, .stApp [data-testid="stNumberInputStepUp"] * {color:#1E3A8A !important; fill:#1E3A8A !important;}
-div[data-baseweb="popover"], div[data-baseweb="popover"] > div, div[data-baseweb="menu"], div[data-baseweb="menu"] * {background:#fff !important; color:#0B2545 !important;}
-div[data-baseweb="menu"] li:hover, div[data-baseweb="menu"] li[aria-selected="true"] {background:#E6F0FF !important;}
+/* Input angka: terang */
+.stApp [data-baseweb="input"], .stApp [data-baseweb="input"] > div, .stApp [data-baseweb="base-input"],
+.stApp [data-testid="stNumberInput"] input {background:#fff !important; color:#0B2545 !important; -webkit-text-fill-color:#0B2545 !important;}
+.stApp [data-baseweb="input"] > div {border:1px solid #CBD5E1 !important; border-radius:10px !important;}
+/* Multiselect filter: latar navy + teks putih (kontras jelas) */
+.stApp [data-testid="stMultiSelect"] [data-baseweb="select"] > div {background:#0B2545 !important; border:1px solid #0B2545 !important; border-radius:10px !important;}
+.stApp [data-testid="stMultiSelect"] [data-baseweb="select"] div, .stApp [data-testid="stMultiSelect"] [data-baseweb="select"] span,
+.stApp [data-testid="stMultiSelect"] input {color:#fff !important; -webkit-text-fill-color:#fff !important;}
+.stApp [data-testid="stMultiSelect"] svg {fill:#fff !important;}
+.stApp [data-testid="stMultiSelect"] span[data-baseweb="tag"] {background:#0FA3B1 !important;}
+div[data-baseweb="popover"] ul, div[data-baseweb="popover"] li, div[data-baseweb="menu"] {background:#0B2545 !important; color:#fff !important;}
+div[data-baseweb="popover"] li * {color:#fff !important;}
+div[data-baseweb="popover"] li:hover, div[data-baseweb="popover"] li[aria-selected="true"] {background:#1D4ED8 !important;}
 /* Radio & slider fallback */
 .stApp [data-testid="stRadio"] [role="radio"][aria-checked="true"] > div:first-child {background:#1D4ED8 !important; border-color:#1D4ED8 !important;}
 .stApp [data-testid="stRadio"] [role="radio"][aria-checked="false"] > div:first-child {background:#fff !important; border:2px solid #94A3B8 !important;}
 .stApp [data-testid="stSlider"] [data-baseweb="slider"] > div > div {background:linear-gradient(to right,#1D4ED8,#1D4ED8) !important;}
 
-/* Select: paksa semua level terang */
-.stApp [data-testid="stSelectbox"] [data-baseweb="select"] div,
-.stApp [data-testid="stMultiSelect"] [data-baseweb="select"] div {background-color:#fff !important; background-image:none !important; color:#0B2545 !important;}
-.stApp [data-testid="stMultiSelect"] span[data-baseweb="tag"] {background-color:#1D4ED8 !important;}
-.stApp [data-testid="stMultiSelect"] span[data-baseweb="tag"] * {background-color:transparent !important; color:#fff !important;}
-.stApp [data-testid="stSelectbox"] [data-baseweb="select"] > div {border:1px solid #CBD5E1 !important; border-radius:10px !important; min-height:42px;}
 
 /* Tabs & widgets */
 button[data-baseweb="tab"] {font-weight:600;}
@@ -271,8 +260,8 @@ with g2:
     with st.container(border=True, key="card_g2"):
         t1, t2 = st.tabs(["Rata-rata per kelompok", "Heatmap usia × BMI"])
         with t1:
-            grp = st.selectbox("Kelompokkan berdasarkan", ["region", "sex", "smoker", "children", "kelompok_bmi"],
-                               format_func=lambda v: LABEL[v])
+            grp = st.radio("Kelompokkan berdasarkan", ["region", "sex", "smoker", "children", "kelompok_bmi"],
+                           format_func=lambda v: LABEL[v], horizontal=True)
             a = d.groupby(grp, observed=True)["charges"].mean().reset_index()
             fig2 = px.bar(a, x=grp, y="charges", text_auto=".2s", labels={grp: LABEL[grp], "charges": "Rata-rata biaya (USD)"})
             fig2.update_traces(marker_color=TEAL, marker_line_width=0, textposition="outside", cliponaxis=False)
@@ -319,11 +308,12 @@ with right:
         age = a1.slider("Usia", 18, 64, 35)
         bmi = a2.slider("BMI", 15.0, 50.0, 27.0, 0.5)
         kids = a3.slider("Jumlah anak", 0, 5, 1)
-        b1, b2, b3, b4 = st.columns([1, 1.2, 1.2, 1])
+        b1, b2 = st.columns(2)
         smoker = b1.radio("Perokok?", ["no", "yes"], horizontal=True)
         sex = b2.radio("Jenis kelamin", ["female", "male"], horizontal=True)
-        region = b3.selectbox("Wilayah", sorted(df.region.unique()))
-        kurs = b4.number_input("Kurs USD → IDR", 10000, 20000, 16000, 100)
+        c1, c2 = st.columns([2.4, 1])
+        region = c1.radio("Wilayah", sorted(df.region.unique()), horizontal=True)
+        kurs = c2.number_input("Kurs USD → IDR", 10000, 20000, 16000, 100)
 
         row = pd.DataFrame([{"age": age, "bmi": bmi, "children": kids, "sex": sex, "smoker": smoker, "region": region}])
         hasil = model.predict(row)[0]
