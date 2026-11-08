@@ -27,8 +27,10 @@ st.markdown("""
 html, body, [class*="css"], .stApp {font-family:'Inter',sans-serif;}
 .stApp {background:#F4F7FB;}
 #MainMenu, footer {visibility:hidden;}
-header[data-testid="stHeader"] {background:transparent;}
-.block-container {padding-top:1.4rem; padding-bottom:2rem; max-width:1400px;}
+header[data-testid="stHeader"] {background:#F4F7FB;}
+:root {color-scheme: light;}
+[data-testid="stToolbar"] *, [data-testid="stHeader"] * {color:#1E3A8A !important;}
+.block-container {padding-top:3rem; padding-bottom:2rem; max-width:1400px;}
 h1,h2,h3,h4 {color:#0B2545; letter-spacing:-0.02em;}
 
 /* Hero */
@@ -56,7 +58,7 @@ div[class*="st-key-card"] {background:#fff; border:1px solid #E5EAF2 !important;
 .kpi {background:#fff; border-radius:14px; padding:16px 18px; border:1px solid #E5EAF2;
   border-left:5px solid var(--accent); box-shadow:0 2px 12px rgba(15,37,69,.05);}
 .kpi-label {font-size:.72rem; font-weight:700; letter-spacing:.08em; color:#64748B; text-transform:uppercase;}
-.kpi-value {font-size:1.75rem; font-weight:800; color:#0B2545; margin:2px 0; line-height:1.15;}
+.kpi-value {font-size:clamp(1.3rem,2vw,1.75rem); white-space:nowrap; font-weight:800; color:#0B2545; margin:2px 0; line-height:1.15;}
 .kpi-sub {font-size:.78rem; color:#64748B;}
 
 /* Insight */
@@ -64,13 +66,15 @@ div[class*="st-key-card"] {background:#fff; border:1px solid #E5EAF2 !important;
   color:#0B2545; font-size:.9rem; margin:12px 0 4px 0;}
 
 /* Result */
-.result {background:linear-gradient(135deg,#0B2545,#0FA3B1); border-radius:16px; padding:22px 24px;
-  color:#fff; box-shadow:0 8px 24px rgba(15,163,177,.30);}
-.r-label {font-size:.72rem; font-weight:700; letter-spacing:.14em; color:#BFEFF3;}
-.r-value {font-size:2.7rem; font-weight:800; line-height:1.1; margin:6px 0 2px 0;}
-.r-idr {font-size:1rem; color:#E0F7FA; margin-bottom:12px;}
-.r-badge {display:inline-block; background:rgba(255,255,255,.18); padding:5px 12px;
-  border-radius:999px; font-size:.8rem; font-weight:600;}
+.result {background:linear-gradient(135deg,#0B2545,#1D4ED8 120%); border-radius:16px; padding:20px 26px;
+  color:#fff; box-shadow:0 8px 24px rgba(29,78,216,.28); display:flex; justify-content:space-between;
+  align-items:center; flex-wrap:wrap; gap:14px; margin:14px 0 6px 0;}
+.r-label {font-size:.72rem; font-weight:700; letter-spacing:.14em; color:#BFD6FF;}
+.r-value {font-size:clamp(2rem,3.4vw,2.8rem); font-weight:800; line-height:1.1; margin:4px 0 2px 0; white-space:nowrap; color:#fff;}
+.r-idr {font-size:1rem; color:#E0ECFF;}
+.r-badge {display:inline-block; background:rgba(255,255,255,.18); padding:6px 14px;
+  border-radius:999px; font-size:.85rem; font-weight:600; color:#fff;}
+.r-note {color:#DCE9FF; font-size:.82rem; margin-top:8px;}
 
 /* ===== Perbaikan keterbacaan (aman untuk mode gelap & terang) ===== */
 .stApp [data-testid="stMarkdownContainer"] p,
@@ -101,6 +105,22 @@ div[data-baseweb="popover"] li:hover {background:#E6F0FF !important;}
 .stApp [data-testid="stSlider"] [data-testid="stThumbValue"], .stApp [data-testid="stSlider"] [data-testid="stTickBarMin"],
 .stApp [data-testid="stSlider"] [data-testid="stTickBarMax"] {color:#1D4ED8 !important; font-weight:700;}
 .stApp [data-testid="stSlider"] div[role="slider"] {background:#1D4ED8 !important; border-color:#1D4ED8 !important;}
+
+/* Brute-force: semua kotak input terang */
+.stApp [data-baseweb="select"], .stApp [data-baseweb="select"] > div, .stApp [data-baseweb="select"] > div > div,
+.stApp [data-baseweb="input"], .stApp [data-baseweb="input"] > div, .stApp [data-baseweb="base-input"],
+.stApp [data-testid="stNumberInput"] input {background:#fff !important; color:#0B2545 !important; -webkit-text-fill-color:#0B2545 !important;}
+.stApp [data-baseweb="select"] > div {border:1px solid #CBD5E1 !important; border-radius:10px !important;}
+.stApp [data-baseweb="select"] span, .stApp [data-baseweb="select"] div[value] {color:#0B2545 !important;}
+.stApp [data-baseweb="select"] span[data-baseweb="tag"], .stApp [data-baseweb="select"] span[data-baseweb="tag"] > span {background:#1D4ED8 !important; color:#fff !important;}
+.stApp [data-testid="stNumberInputStepDown"], .stApp [data-testid="stNumberInputStepUp"] {background:#EEF2FF !important; color:#1E3A8A !important;}
+.stApp [data-testid="stNumberInputStepDown"] *, .stApp [data-testid="stNumberInputStepUp"] * {color:#1E3A8A !important; fill:#1E3A8A !important;}
+div[data-baseweb="popover"], div[data-baseweb="popover"] > div, div[data-baseweb="menu"], div[data-baseweb="menu"] * {background:#fff !important; color:#0B2545 !important;}
+div[data-baseweb="menu"] li:hover, div[data-baseweb="menu"] li[aria-selected="true"] {background:#E6F0FF !important;}
+/* Radio & slider fallback */
+.stApp [data-testid="stRadio"] [role="radio"][aria-checked="true"] > div:first-child {background:#1D4ED8 !important; border-color:#1D4ED8 !important;}
+.stApp [data-testid="stRadio"] [role="radio"][aria-checked="false"] > div:first-child {background:#fff !important; border:2px solid #94A3B8 !important;}
+.stApp [data-testid="stSlider"] [data-baseweb="slider"] > div > div {background:linear-gradient(to right,#1D4ED8,#1D4ED8) !important;}
 
 /* Tabs & widgets */
 button[data-baseweb="tab"] {font-weight:600;}
@@ -234,7 +254,7 @@ with g1:
                          hover_data=["sex", "region", "children"], color_discrete_map=SMOKER_COLOR,
                          labels={x_var: LABEL[x_var], "charges": "Biaya (USD)", "smoker": "Perokok"})
         fig.update_traces(marker=dict(size=7, line=dict(width=0.5, color="white")))
-        st.plotly_chart(style(fig, 380), width="stretch")
+        st.plotly_chart(style(fig, 380), width="stretch", theme=None)
 with g2:
     with st.container(border=True, key="card_g2"):
         t1, t2 = st.tabs(["Rata-rata per kelompok", "Heatmap usia × BMI"])
@@ -244,14 +264,14 @@ with g2:
             a = d.groupby(grp, observed=True)["charges"].mean().reset_index()
             fig2 = px.bar(a, x=grp, y="charges", text_auto=".2s", labels={grp: LABEL[grp], "charges": "Rata-rata biaya (USD)"})
             fig2.update_traces(marker_color=TEAL, marker_line_width=0, textposition="outside", cliponaxis=False)
-            st.plotly_chart(style(fig2, 320, legend=False), width="stretch")
+            st.plotly_chart(style(fig2, 320, legend=False), width="stretch", theme=None)
         with t2:
             hm = d.pivot_table(index="kelompok_usia", columns="kelompok_bmi", values="charges",
                                aggfunc="mean", observed=False)
             fig4 = px.imshow(hm, text_auto=".0f", aspect="auto", color_continuous_scale=["#E6F7F9", TEAL, NAVY],
                              labels=dict(x="Kategori BMI", y="Kelompok usia", color="USD"))
             fig4.update_layout(coloraxis_showscale=False)
-            st.plotly_chart(style(fig4, 365, legend=False), width="stretch")
+            st.plotly_chart(style(fig4, 365, legend=False), width="stretch", theme=None)
 
 # ---------- BARIS 3 : MODEL (kiri) ──► PREDIKSI (kanan) ----------
 section(3, "Model & Prediksi", "atur parameter lalu lihat hasilnya langsung berubah")
@@ -266,57 +286,60 @@ with left:
             lr = st.select_slider("Learning rate", [0.01, 0.05, 0.1, 0.2, 0.3], value=0.1)
         model, r2, mae, imp_df = train_model(n_est, depth, lr)
         m1, m2 = st.columns(2)
-        m1.markdown(kpi("Akurasi R²", f"{r2:.2f}", "mendekati 1 = bagus", TEAL), unsafe_allow_html=True)
-        m2.markdown(kpi("Rata-rata galat", f"${mae:,.0f}", "MAE pada data uji", ORANGE), unsafe_allow_html=True)
+        m1.markdown(kpi("Akurasi R²", f"{r2:.2f}", "makin dekat 1 makin baik", TEAL), unsafe_allow_html=True)
+        m2.markdown(kpi("Rata-rata galat", f"${mae:,.0f}", "selisih rata-rata (MAE)", ORANGE), unsafe_allow_html=True)
         fi = px.bar(imp_df, x="Pengaruh", y="Fitur", orientation="h", title="Faktor paling berpengaruh")
         fi.update_traces(marker_color=[TEAL] * (len(imp_df) - 1) + [ORANGE], marker_line_width=0)
         fi.update_yaxes(showgrid=False)
         fi.update_xaxes(showgrid=True, gridcolor=GRID)
-        st.plotly_chart(style(fi, 300, legend=False), width="stretch")
+        st.plotly_chart(style(fi, 300, legend=False), width="stretch", theme=None)
 
 with right:
     with st.container(border=True, key="card_pred"):
-        st.markdown("**🔮 Simulasi prediksi biaya**")
-        in_col, out_col = st.columns([1.1, 1], gap="large")
-        with in_col:
-            age = st.slider("Usia", 18, 64, 35)
-            bmi = st.slider("BMI", 15.0, 50.0, 27.0, 0.5)
-            kids = st.slider("Jumlah anak", 0, 5, 1)
-            q1, q2 = st.columns(2)
-            smoker = q1.radio("Perokok?", ["no", "yes"], horizontal=True)
-            sex = q2.radio("Jenis kelamin", ["female", "male"], horizontal=True)
-            region = st.selectbox("Wilayah", sorted(df.region.unique()))
+        st.markdown("**🔮 Simulasi prediksi biaya** · geser parameter, hasil langsung berubah")
+        a1, a2, a3 = st.columns(3)
+        age = a1.slider("Usia", 18, 64, 35)
+        bmi = a2.slider("BMI", 15.0, 50.0, 27.0, 0.5)
+        kids = a3.slider("Jumlah anak", 0, 5, 1)
+        b1, b2, b3, b4 = st.columns([1, 1.2, 1.2, 1])
+        smoker = b1.radio("Perokok?", ["no", "yes"], horizontal=True)
+        sex = b2.radio("Jenis kelamin", ["female", "male"], horizontal=True)
+        region = b3.selectbox("Wilayah", sorted(df.region.unique()))
+        kurs = b4.number_input("Kurs USD → IDR", 10000, 20000, 16000, 100)
+
         row = pd.DataFrame([{"age": age, "bmi": bmi, "children": kids, "sex": sex, "smoker": smoker, "region": region}])
         hasil = model.predict(row)[0]
         pct = (df.charges < hasil).mean() * 100
-        with out_col:
-            kurs = st.number_input("Kurs USD → IDR", 10000, 20000, 16000, 100)
-            st.markdown(f'<div class="result"><div class="r-label">PREDIKSI BIAYA PER TAHUN</div>'
-                        f'<div class="r-value">${hasil:,.0f}</div><div class="r-idr">≈ {rupiah(hasil * kurs)}</div>'
-                        f'<div class="r-badge">Lebih mahal dari {pct:.0f}% peserta</div></div>', unsafe_allow_html=True)
-            sel = (hasil - df.charges.mean()) / df.charges.mean() * 100
-            st.caption(f"{abs(sel):.0f}% {'di atas' if sel > 0 else 'di bawah'} rata-rata seluruh peserta (${df.charges.mean():,.0f}).")
+        mean_all = df.charges.mean()
+        sel = (hasil - mean_all) / mean_all * 100
+        st.markdown(f'<div class="result"><div><div class="r-label">PREDIKSI BIAYA PER TAHUN</div>'
+                    f'<div class="r-value">${hasil:,.0f}</div><div class="r-idr">≈ {rupiah(hasil * kurs)}</div></div>'
+                    f'<div><div class="r-badge">Lebih mahal dari {pct:.0f}% peserta</div>'
+                    f'<div class="r-note">{abs(sel):.0f}% {"di atas" if sel > 0 else "di bawah"} rata-rata semua peserta (${mean_all:,.0f})</div></div>'
+                    f'</div>', unsafe_allow_html=True)
 
         p1, p2 = st.tabs(["Posisi di distribusi biaya", "Simulasi biaya vs usia"])
         with p1:
             fig5 = px.histogram(df, x="charges", nbins=40, labels={"charges": "Biaya (USD)"})
-            fig5.update_traces(marker_color="#BFE9ED", marker_line_width=0)
+            fig5.update_traces(marker_color="#BFD6FF", marker_line_width=0)
+            pos_pred = "top right" if hasil >= mean_all else "top left"
+            pos_mean = "top left" if hasil >= mean_all else "top right"
             fig5.add_vline(x=hasil, line_color=ORANGE, line_width=3, annotation_text="Prediksi Anda",
-                           annotation_font_color=ORANGE)
-            fig5.add_vline(x=df.charges.mean(), line_dash="dash", line_color=NAVY, annotation_text="Rata-rata",
-                           annotation_position="top left", annotation_font_color=NAVY)
+                           annotation_position=pos_pred, annotation_font_color=ORANGE)
+            fig5.add_vline(x=mean_all, line_dash="dash", line_color=NAVY, annotation_text="Rata-rata",
+                           annotation_position=pos_mean, annotation_font_color=NAVY)
             fig5.update_yaxes(title="Jumlah peserta")
-            st.plotly_chart(style(fig5, 270, legend=False), width="stretch")
+            st.plotly_chart(style(fig5, 280, legend=False), width="stretch", theme=None)
         with p2:
             ages = list(range(18, 65, 2))
             fig3 = go.Figure()
-            for s, col, nm in [("no", TEAL, "Non-perokok"), ("yes", ORANGE, "Perokok")]:
-                grid = pd.DataFrame({"age": ages, "bmi": bmi, "children": kids, "sex": sex, "smoker": s, "region": region})
+            for s_, col, nm in [("no", TEAL, "Non-perokok"), ("yes", ORANGE, "Perokok")]:
+                grid = pd.DataFrame({"age": ages, "bmi": bmi, "children": kids, "sex": sex, "smoker": s_, "region": region})
                 fig3.add_scatter(x=ages, y=model.predict(grid), mode="lines", name=nm, line=dict(color=col, width=3))
             fig3.add_scatter(x=[age], y=[hasil], mode="markers", name="Input Anda",
                              marker=dict(size=15, color=NAVY, symbol="star", line=dict(width=2, color="white")))
             fig3.update_layout(xaxis_title="Usia", yaxis_title="Prediksi biaya (USD)")
-            st.plotly_chart(style(fig3, 270), width="stretch")
+            st.plotly_chart(style(fig3, 280), width="stretch", theme=None)
 
 st.markdown('<div class="foot">Sumber data: Medical Cost Personal Dataset (Brett Lantz, <i>Machine Learning with R</i>) · '
             'github.com/stedy/Machine-Learning-with-R-datasets</div>', unsafe_allow_html=True)
